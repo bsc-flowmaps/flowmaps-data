@@ -21,7 +21,14 @@ def geolayer(layer, print_url=False):
     return featureCollection
 
 
-def covid19(ev, start_date=None, end_date=None, fmt='csv', print_url=False):
+def clean_docs(docs, drop_fields):
+    for doc in docs:
+        for field in drop_fields:
+            del(doc[field])
+    return docs
+
+
+def covid19(ev, start_date=None, end_date=None, fmt='dataframe', print_url=False):
     filters = {
         'ev': ev,
         'type': 'covid19',
@@ -33,12 +40,13 @@ def covid19(ev, start_date=None, end_date=None, fmt='csv', print_url=False):
     elif end_date:
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    if fmt == 'csv':
+    data = clean_docs(data, ['d', 'c', 'updated_at', '_id', 'was_missing', 'type', 'ev'])
+    if fmt == 'dataframe':
         return pd.DataFrame(data)
     return data
 
 
-def dataset(ev, start_date=None, end_date=None, fmt='csv', print_url=False):
+def dataset(ev, start_date=None, end_date=None, fmt='dataframe', print_url=False):
     filters = {
         'ev': ev,
     }
@@ -49,12 +57,12 @@ def dataset(ev, start_date=None, end_date=None, fmt='csv', print_url=False):
     elif end_date:
         filters['evstart'] = {'$lt': date_rfc1123(parse_date(end_date) + timedelta(days=1))}
     data = fetch_all_pages('layers.data', filters, print_url=print_url)
-    if fmt == 'csv':
+    if fmt == 'dataframe':
         return pd.DataFrame(data)
     return data
 
 
-def daily_mobility_matrix(source_layer, target_layer, start_date=None, end_date=None, source=None, target=None, fmt='csv', print_url=False):
+def daily_mobility(source_layer, target_layer, start_date=None, end_date=None, source=None, target=None, fmt='dataframe', print_url=False):
     filters = {
         'source_layer': source_layer,
         'target_layer': target_layer,
@@ -70,12 +78,12 @@ def daily_mobility_matrix(source_layer, target_layer, start_date=None, end_date=
     if target:
         filters['target'] = target
     data = fetch_all_pages('mitma_mov.daily_mobility_matrix', filters, print_url=print_url)
-    if fmt == 'csv':
+    if fmt == 'dataframe':
         return pd.DataFrame(data)
     return data
 
 
-def population(layer, start_date=None, end_date=None, fmt='csv', print_url=False):
+def population(layer, start_date=None, end_date=None, fmt='dataframe', print_url=False):
     filters = {
         'layer': layer,
         'type': 'population',
@@ -87,12 +95,12 @@ def population(layer, start_date=None, end_date=None, fmt='csv', print_url=False
     elif end_date:
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    if fmt == 'csv':
+    if fmt == 'dataframe':
         return pd.DataFrame(data)
     return data
 
 
-def zone_movements(layer, start_date=None, end_date=None, fmt='csv', print_url=False):
+def zone_movements(layer, start_date=None, end_date=None, fmt='dataframe', print_url=False):
     filters = {
         'layer': layer,
         'type': 'zone_movements',
@@ -104,6 +112,6 @@ def zone_movements(layer, start_date=None, end_date=None, fmt='csv', print_url=F
     elif end_date:
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    if fmt == 'csv':
+    if fmt == 'dataframe':
         return pd.DataFrame(data)
     return data

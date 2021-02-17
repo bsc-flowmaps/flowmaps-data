@@ -36,7 +36,9 @@ CONFIG = {
         "subcommands": {
             "list": {
                 "fn": commands.list_covid19,
-                "argparse": {},
+                "argparse": {
+                    "--only-ids": {"dest": "only_ids", "required": False, "default": False, "action": "store_true", "help": "", },
+                },
             },
             "describe": {
                 "fn": commands.describe_covid19,
@@ -82,20 +84,45 @@ CONFIG = {
             },
         },
     },
-    "daily_mobility_matrix": {
+    "hourly_mobility": {
         "subcommands": {
             "list": {
-                "fn": commands.list_daily_mobility_matrix,
+                "fn": commands.list_hourly_mobility,
+                "argparse": {
+                    "--only-urls": {"dest": "only_urls", "required": False, "default": False, "action": "store_true", "help": "", },
+                },
+            },
+            "list-dates": {
+                "fn": commands.list_hourly_mobility_dates,
                 "argparse": {},
             },
             "describe": {
-                "fn": commands.describe_daily_mobility_matrix,
+                "fn": commands.describe_hourly_mobility,
+                "argparse": {
+                    "--date": {"dest": "date", "required": True, "type": str, "help": "", },
+                    "--only-url": {"dest": "only_url", "required": False, "default": False, "action": "store_true", "help": "", },
+                },
+            },
+        },
+    },
+    "daily_mobility": {
+        "subcommands": {
+            "list": {
+                "fn": commands.list_daily_mobility,
+                "argparse": {},
+            },
+            "list-dates": {
+                "fn": commands.list_daily_mobility_dates,
+                "argparse": {},
+            },
+            "describe": {
+                "fn": commands.describe_daily_mobility,
                 "argparse": {
                     "--provenance": {"required": False, "default": False, "action": "store_true", "help": "show provenance", },
                 },
             },
             "download": {
-                "fn": commands.download_daily_mobility_matrix,
+                "fn": commands.download_daily_mobility,
                 "argparse": {
                     "--source-layer": {"required": True, "dest": "source_layer", "type": str, "help": "", },
                     "--target-layer": {"required": True, "dest": "target_layer", "type": str, "help": "", },
@@ -183,9 +210,9 @@ examples:
     flowmaps-data population download --layer zbs_15 --output-file out.csv
 
     # Origin-destination daily mobility (from MITMA)
-    flowmaps-data daily_mobility_matrix list
-    flowmaps-data daily_mobility_matrix describe
-    flowmaps-data daily_mobility_matrix download --source-layer cnig_provincias --target-layer cnig_provincias --start-date 2020-10-10 --end-date 2020-10-16 --output-file out.csv
+    flowmaps-data daily_mobility list
+    flowmaps-data daily_mobility describe
+    flowmaps-data daily_mobility download --source-layer cnig_provincias --target-layer cnig_provincias --start-date 2020-10-10 --end-date 2020-10-16 --output-file out.csv
 
     # Daily zone movements (from MITMA)
     flowmaps-data zone_movements list
@@ -195,7 +222,7 @@ examples:
     # Raw datasets
     flowmaps-data datasets list
     flowmaps-data datasets describe --ev ES.covid_cpro
-    flowmaps-data datasets download --ev ES.covid_cpro --output-file out.csv --output-type csv
+    flowmaps-data datasets download --ev ES.covid_cpro --output-file out.csv --output-format csv
 '''
 
 def print_usage():
