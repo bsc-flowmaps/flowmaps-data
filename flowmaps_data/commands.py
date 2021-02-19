@@ -3,8 +3,8 @@ import pandas as pd
 from dateutil.parser import parse
 from datetime import timedelta
 
-from .utils import fetch_first, fetch_all_pages, date_rfc1123, parse_date, tz
-from .data import geolayer, covid19, dataset, daily_mobility, population, zone_movements
+from .utils import fetch_first, fetch_all_pages, date_rfc1123, parse_date, tz, save_df
+from .data import geolayer, covid19, dataset, daily_mobility, population, zone_movements, risk
 
 
 def list_layers():
@@ -107,25 +107,8 @@ def describe_covid19(ev, provenance=False):
 
 def download_covid19(ev, output_file, output_format='csv', start_date=None, end_date=None):
     print(f'Dowloading consolidated health data for ev={ev}')
-    filters = {
-        'ev': ev,
-        'type': 'covid19',
-    }
-    data = covid19(ev, start_date=start_date, end_date=end_date, fmt='records', print_url=True)
-    if output_format == 'csv':
-        df = pd.DataFrame(data)
-        df.to_csv(output_file, index=False)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    elif output_format == 'json':
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        print('Saved to file:', output_file)
-    elif output_format == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(output_file)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    else:
-        print('Unrecognized output_format. Choose one from: csv, json, parquet')
+    df = covid19(ev, start_date=start_date, end_date=end_date, print_url=True)
+    save_df(df, output_file, output_format)
 
 
 def list_data():
@@ -167,21 +150,8 @@ def describe_data(ev, provenance=False):
 
 def download_data(ev, output_file, output_format='csv', start_date=None, end_date=None):
     print(f'Dowloading data for ev={ev}')
-    data = dataset(ev, start_date=start_date, end_date=end_date, fmt='records', print_url=True)
-    if output_format == 'csv':
-        df = pd.DataFrame(data)
-        df.to_csv(output_file, index=False)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    elif output_format == 'json':
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        print('Saved to file:', output_file)
-    elif output_format == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(output_file)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    else:
-        print('Unrecognized output_format. Choose one from: csv, json, parquet')
+    df = dataset(ev, start_date=start_date, end_date=end_date, print_url=True)
+    save_df(df, output_file, output_format)
 
 
 def list_hourly_mobility(only_urls=False):
@@ -226,33 +196,12 @@ def describe_hourly_mobility(date, only_url=False):
 
 def list_daily_mobility():
     print('Listing available mobility layers:')
-    # filters = {
-    #     'collection': 'mitma_mov.daily_mobility_matrix', 
-    #     'field': 'source_layer',
-    #     'query': {'date': '2020-10-10'},
-    # }
-    # data = fetch_all_pages('distinct', filters)
-    # print("\n".join(data))
-
-    pairs = [["mitma_mov", "mitma_mov"],
-        ["cnig_provincias", "cnig_provincias"],
-        ["cnig_ccaa", "cnig_ccaa"],
-        ["abs_09", "abs_09"],
-        ["zbs_15", "zbs_15"],
-        ["zbs_07", "zbs_07"],
-        ["oe_16", "oe_16"],
-        ["zon_bas_13", "zon_bas_13"],
-        ["cnig_provincias", "abs_09"],
-        ["abs_09", "cnig_provincias"],
-        ["cnig_provincias", "zbs_15"],
-        ["zbs_15", "cnig_provincias"],
-        ["cnig_provincias", "zbs_07"],
-        ["zbs_07", "cnig_provincias"],
-        ["cnig_provincias", "oe_16"],
-        ["oe_16", "cnig_provincias"],
-        ["cnig_provincias", "zon_bas_13"],
-        ["zon_bas_13", "cnig_provincias"]]
-
+    filters = {
+        'storedIn': 'mitma_mov.daily_mobility_matrix', 
+        'keywords.layer_pairs': {'$ne': None},
+    }
+    data = fetch_all_pages('provenance', filters, progress=False)[0]
+    pairs = data['keywords']['layer_pairs']
     for source_layer, target_layer in pairs:
         print(json.dumps({"source_layer": source_layer, "target_layer": target_layer}))
 
@@ -289,24 +238,11 @@ def describe_daily_mobility(provenance=False):
 
 def download_daily_mobility(source_layer, target_layer, output_file, start_date=None, end_date=None, output_format='csv', source=None, target=None):
     print(f'Dowloading mobility matrix for source_layer={source_layer} target_layer={target_layer}')
-    data = daily_mobility(source_layer, target_layer, 
-                          start_date=start_date, end_date=end_date, 
-                          source=source, target=target,
-                          fmt='records', print_url=True)
-    if output_format == 'csv':
-        df = pd.DataFrame(data)
-        df.to_csv(output_file, index=False)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    elif output_format == 'json':
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        print('Saved to file:', output_file)
-    elif output_format == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(output_file)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    else:
-        print('Unrecognized output_format. Choose one from: csv, json, parquet')
+    df = daily_mobility(source_layer, target_layer, 
+                        start_date=start_date, end_date=end_date, 
+                        source=source, target=target,
+                        print_url=True)
+    save_df(df, output_file, output_format)
 
 
 def list_population_layers():
@@ -349,22 +285,8 @@ def describe_population(layer, provenance=False):
 
 def download_population(layer, output_file, output_format='csv', start_date=None, end_date=None):
     print(f'Dowloading population for layer={layer}')
-    data = population(layer, start_date=start_date, end_date=end_date, fmt='records', print_url=True)
-    
-    if output_format == 'csv':
-        df = pd.DataFrame(data)
-        df.to_csv(output_file, index=False)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    elif output_format == 'json':
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        print('Saved to file:', output_file)
-    elif output_format == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(output_file)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    else:
-        print('Unrecognized output_format. Choose one from: csv, json, parquet')
+    df = population(layer, start_date=start_date, end_date=end_date, print_url=True)
+    save_df(df, output_file, output_format)
 
 
 def list_zone_movements():
@@ -410,19 +332,53 @@ def describe_zone_movements(provenance=False):
 
 def download_zone_movements(layer, output_file, output_format='csv', start_date=None, end_date=None):
     print(f'Dowloading population for layer={layer}')
-    data = zone_movements(layer, start_date=start_date, end_date=end_date, fmt='records', print_url=True)
+    df = zone_movements(layer, start_date=start_date, end_date=end_date, print_url=True)
+    save_df(df, output_file, output_format)
+
+
+def list_risk():
+    filters = {
+        'storedIn': 'mitma_mov.daily_mobility_matrix', 
+        'keywords.layer_pairs': {'$ne': None},
+    }
+    data = fetch_all_pages('provenance', filters, progress=False)[0]
+    pairs = data['keywords']['layer_pairs']
+
+    filters = {
+        'storedIn': 'layers.data.consolidated',
+        'keywords.type': 'covid19', 
+    }
+    data = fetch_all_pages('provenance', filters, progress=False)
+    print('Risk available for the following combinations of source layer, target layer and covid19 dataset:')
+    for doc in data:
+        ev = doc['keywords']['ev']
+        layer = doc['keywords']['layer']
+        for pair in pairs:
+            if pair[0] == layer:
+                print(json.dumps({'source_layer': pair[0], 'target_layer': pair[1], 'ev': ev}))
+
+
+def list_risk_dates(ev):
+    filters = {
+        'storedIn': 'mitma_mov.daily_mobility_matrix',
+        'numEntries': {'$gt': 0},
+    }
+    docs = fetch_all_pages('provenance', filters, sort='keywords.evday', progress=False)
+    mobility_dates = [doc['keywords']['date'] for doc in docs]
+
+    filters = {
+        'collection': 'layers.data.consolidated', 
+        'field': 'date',
+        'query': {'type': 'covid19', 'ev': ev},
+    }
+    covid_dates = fetch_all_pages('distinct', filters, progress=False)
     
-    if output_format == 'csv':
-        df = pd.DataFrame(data)
-        df.to_csv(output_file, index=False)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    elif output_format == 'json':
-        with open(output_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        print('Saved to file:', output_file)
-    elif output_format == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(output_file)
-        print(f'{df.shape[0]} rows written to file:', output_file)
-    else:
-        print('Unrecognized output_format. Choose one from: csv, json, parquet')
+    dates = sorted(set(mobility_dates).intersection(covid_dates))
+    print('\n'.join(dates))
+
+
+def download_risk(source_layer, target_layer, ev, date, output_file, output_format='csv'):
+    print(f'Dowloading risk for source_layer={source_layer}, target_layer={target_layer}')
+    df = risk(source_layer, target_layer, ev, date)
+    save_df(df, output_file, output_format)
+

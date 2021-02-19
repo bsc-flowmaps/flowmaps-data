@@ -185,6 +185,31 @@ CONFIG = {
             },
         },
     },
+    "risk": {
+        "subcommands": {
+            "list": {
+                "fn": commands.list_risk,
+                "argparse": {},
+            },
+            "list-dates": {
+                "fn": commands.list_risk_dates,
+                "argparse": {
+                    "--ev": {"dest": "ev", "required": True, "type": str, "help": "", },
+                },
+            },
+            "download": {
+                "fn": commands.download_risk,
+                "argparse": {
+                    "--source-layer": {"dest": "source_layer", "required": True, "type": str, "help": "", },
+                    "--target-layer": {"dest": "target_layer", "required": True, "type": str, "help": "", },
+                    "--ev": {"dest": "ev", "required": True, "type": str, "help": "", },
+                    "--date": {"dest": "date", "required": True, "type": str, "help": "", },
+                    "--output-file": {"required": True, "dest": "output_file", "type": str, "help": "", },
+                    "--output-format": {"required": False, "dest": "output_format", "default": "csv", "type": str, "help": "", },
+                },
+            },
+        },
+    },
 }
 
 
@@ -202,7 +227,7 @@ examples:
     # Consolidated COVID-19 data
     flowmaps-data covid19 list
     flowmaps-data covid19 describe --ev ES.covid_cpro
-    flowmaps-data covid19 download --ev ES.covid_cpro --output-file out.csv --output-type csv
+    flowmaps-data covid19 download --ev ES.covid_cpro --output-file out.csv --output-format csv
 
     # Population
     flowmaps-data population list
@@ -211,6 +236,7 @@ examples:
 
     # Origin-destination daily mobility (from MITMA)
     flowmaps-data daily_mobility list
+    flowmaps-data daily_mobility list-dates
     flowmaps-data daily_mobility describe
     flowmaps-data daily_mobility download --source-layer cnig_provincias --target-layer cnig_provincias --start-date 2020-10-10 --end-date 2020-10-16 --output-file out.csv
 
@@ -223,6 +249,11 @@ examples:
     flowmaps-data datasets list
     flowmaps-data datasets describe --ev ES.covid_cpro
     flowmaps-data datasets download --ev ES.covid_cpro --output-file out.csv --output-format csv
+
+    # Mobility Associated Risk
+    flowmaps-data risk list
+    flowmaps-data risk list-dates
+    flowmaps-data risk download --source-layer cnig_provincias --target-layer cnig_provincias --ev ES.covid_cpro --date 2020-10-10 --output-file out.csv --output-format csv
 '''
 
 def print_usage():

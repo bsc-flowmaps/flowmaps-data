@@ -13,7 +13,7 @@ if os.path.isfile(requirementPath):
 
 setuptools.setup(
     name="flowmaps_data",
-    version="0.0.13",
+    version="0.0.14",
     author="Javier del Valle Contreras",
     author_email="javier.delvalle@bsc.es",
     description="A tool for downloading Spanish COVID-19 and mobility data",

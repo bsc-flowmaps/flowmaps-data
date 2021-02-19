@@ -1,2 +1,2 @@
-from .flowmaps_data import main
+from .main import main
 from .data import *

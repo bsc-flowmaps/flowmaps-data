@@ -63,7 +63,6 @@ def fetch_all_pages(collection, query, batch_size=1000, projection={}, sort=None
     num_docs = response['_meta']['total']
     if num_docs <= 0:
         return data
-    num_pages = int(num_docs/batch_size)
     if progress: bar = Bar('Dowloading documents', max=num_docs)
     while 'next' in response['_links']:
         if progress: bar.goto(len(data))
@@ -74,3 +73,17 @@ def fetch_all_pages(collection, query, batch_size=1000, projection={}, sort=None
     if progress: bar.finish()
     return data
 
+
+def save_df(df, output_file, output_format):
+    if output_format == 'csv':
+        df.to_csv(output_file, index=False)
+        print(f'{df.shape[0]} rows written to file:', output_file)
+    elif output_format == 'json':
+        with open(output_file, 'w') as f:
+            json.dump(df.to_dict('records'), f, indent=2)
+        print('Saved to file:', output_file)
+    elif output_format == 'parquet':
+        df.to_parquet(output_file)
+        print(f'{df.shape[0]} rows written to file:', output_file)
+    else:
+        print('Unrecognized output_format. Choose one from: csv, json, parquet')
