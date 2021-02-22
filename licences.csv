@@ -1,0 +1,86 @@
+Data Source,Licence,Home Page
+ine_mov,http://www.ine.es/aviso_legal,https://www.ine.es/covid/covid_movilidad.htm
+mitma_mov,https://www.mitma.gob.es/el-ministerio/buen-gobierno/licencia_datos,https://www.mitma.gob.es/ministerio/covid-19/evolucion-movilidad-big-data/opendata-movilidad
+mitma_mun_mov,https://www.mitma.gob.es/el-ministerio/buen-gobierno/licencia_datos,https://www.mitma.gob.es/ministerio/covid-19/evolucion-movilidad-big-data/opendata-movilidad
+ine_sec,http://www.ine.es/aviso_legal,https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout
+ine_districts,http://www.ine.es/aviso_legal,https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout
+ine_municipios,http://www.ine.es/aviso_legal,https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout
+cnig_municipios,http://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf,http://centrodedescargas.cnig.es/CentroDescargas/catalogo.do?Serie=LILIM
+cnig_provincias,http://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf,http://centrodedescargas.cnig.es/CentroDescargas/catalogo.do?Serie=LILIM
+cnig_ccaa,http://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf,http://centrodedescargas.cnig.es/CentroDescargas/catalogo.do?Serie=LILIM
+world,https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units,https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/countries
+ate_pri,https://opendefinition.org/licenses/cc-by/,https://comunidadsig.maps.arcgis.com/home/item.html?id=e9e8543a13474b4abef15f6d5a43ab31
+ate_urg_extra,https://opendefinition.org/licenses/cc-by/,https://comunidadsig.maps.arcgis.com/home/item.html?id=c4ad72ed81594da4955acb2a57fd8533
+hospitales,https://opendefinition.org/licenses/cc-by/,https://comunidadsig.maps.arcgis.com/home/item.html?id=68745a7fb7a348b6b0d722c8517790af
+reg_san_09,http://creativecommons.org/licenses/ by-nc-nd/4.0/deed.ca,https://salutweb.gencat.cat/ca/el_departament/estadistiques_sanitaries/cartografia/
+sect_san_09,http://creativecommons.org/licenses/ by-nc-nd/4.0/deed.ca,https://salutweb.gencat.cat/ca/el_departament/estadistiques_sanitaries/cartografia/
+aga_09,http://creativecommons.org/licenses/ by-nc-nd/4.0/deed.ca,https://salutweb.gencat.cat/ca/el_departament/estadistiques_sanitaries/cartografia/
+abs_09,http://creativecommons.org/licenses/ by-nc-nd/4.0/deed.ca,https://salutweb.gencat.cat/ca/el_departament/estadistiques_sanitaries/cartografia/
+shires_09,http://creativecommons.org/licenses/by/4.0/deed.ca,https://www.icgc.cat/Administracio-i-empresa/Descarregues/Capes-de-geoinformacio/Base-municipal
+mun_dis_13,https://creativecommons.org/licenses/by/4.0/legalcode.es,"http://origin-datos.comunidad.madrid/catalogo/dataset/covid19_tia_muni_y_distritos/resource/46a2f4c4-aaf6-4019-8979-fd2873c5bd7d,http://origin-datos.comunidad.madrid/catalogo/dataset/covid19_tia_muni_y_distritos"
+zon_bas_13,https://creativecommons.org/licenses/by/4.0/legalcode.es,"http://origin-datos.comunidad.madrid/catalogo/dataset/covid19_tia_zonas_basicas_salud/resource/f1837bd3-a835-4110-9bbf-fae06c99b56b,http://origin-datos.comunidad.madrid/catalogo/dataset/covid19_tia_zonas_basicas_salud"
+area_san_13,https://choosealicense.com/no-permission/,http://www.madrid.org/nomecalles/DescargaBDTCorte.icm
+dis_san_13,https://choosealicense.com/no-permission/,http://www.madrid.org/nomecalles/DescargaBDTCorte.icm
+zon_san_13,https://choosealicense.com/no-permission/,http://www.madrid.org/nomecalles/DescargaBDTCorte.icm
+zbs_13,https://choosealicense.com/no-permission/,http://www.madrid.org/nomecalles/DescargaBDTCorte.icm
+oe_16,https://creativecommons.org/licenses/by/4.0/deed.es_ES,https://www.geo.euskadi.eus/zonas-de-salud-de-euskadi/s69-geodir/es/
+cs_hosp_16,https://creativecommons.org/licenses/by/4.0/deed.es_ES,https://opendata.euskadi.eus/catalogo/-/centros-de-salud-publicos-en-euskadi/
+zbs_15,https://creativecommons.org/licenses/by/4.0/deed.es,https://gobiernoabierto.navarra.es/es/open-data/datos/servicio-navarro-salud-delimitacion-zonas-basicas-salud
+as_15,https://creativecommons.org/licenses/by/4.0/deed.es,https://gobiernoabierto.navarra.es/es/open-data/datos/servicio-navarro-salud-delimitacion-areas-salud
+zbs_07,https://www.jcyl.es/licencia-IGCYL-NC,https://datosabiertos.jcyl.es/web/jcyl/set/es/medio-ambiente/zonas-basicas-salud-cyl/1284688135689
+codigos_postales,https://choosealicense.com/no-permission/,https://analisisydecision.es/como-hacer-un-mapa-de-espana-por-codigos-postales-con-qgis/
+comarcas_12,https://choosealicense.com/no-permission/,http://mapas.xunta.gal/centro-de-descargas
+concellos_12,https://choosealicense.com/no-permission/,http://mapas.xunta.gal/centro-de-descargas
+parroquias_12,https://choosealicense.com/no-permission/,http://mapas.xunta.gal/centro-de-descargas
+as_12,https://choosealicense.com/no-permission/,"https://www.sergas.es/Saude-publica/GIS-Areas-sanitarias,https://www.sergas.es/Saude-publica/GIS-Limites-administrativos"
+dis_san_01,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/ieagen/avisoLegal/index.htm#cc,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/DERA/g13.htm
+zbs_01,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/ieagen/avisoLegal/index.htm#cc,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/DERA/g13.htm
+d_zbs_01,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/ieagen/avisoLegal/index.htm#cc,https://www.juntadeandalucia.es/institutodeestadisticaycartografia/DERA/g13.htm
+andorra,https://choosealicense.com/no-permission/,https://www.iea.ad/limit-estatal
+parroquias_03,https://creativecommons.org/licenses/by/4.0/deed,"https://ideas.asturias.es/catalogo-de-metadatos/?uuid=spaGOPAcde_carto_ua2015,https://ideas.asturias.es/es/centro-de-descargas?category=1&subcategory=7&lang=es"
+concejos_03,https://creativecommons.org/licenses/by/4.0/deed,"https://ideas.asturias.es/catalogo-de-metadatos/?uuid=spaGOPAcde_carto_ua2015,https://ideas.asturias.es/es/centro-de-descargas?category=1&subcategory=7&lang=es"
+as_03,https://creativecommons.org/licenses/by/4.0/deed,"https://ideas.asturias.es/catalogo-de-metadatos/?uuid=spaGOPAcde_carto_ua2015,https://ideas.asturias.es/es/centro-de-descargas?category=1&subcategory=7&lang=es"
+geostat,Non commercial use only. Detailed conditions can be found in the file GEOSTAT_grid_POP_1K_2011_Usage-and-License-Conditions.txt;,https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/population-distribution-demography/geostat
+09.covid_abs,http://opendatacommons.org/licenses/by/1.0/,https://analisi.transparenciacatalunya.cat/Salut/Registre-de-casos-de-COVID-19-realitzats-a-Catalun/xuwf-dxjd
+09.covid_cumun,http://opendatacommons.org/licenses/by/1.0/,https://analisi.transparenciacatalunya.cat/Salut/Registre-de-casos-de-COVID-19-realitzats-a-Catalun/jj6z-iyrp
+09.covid_aga,http://opendatacommons.org/licenses/by/1.0/,https://analisi.transparenciacatalunya.cat/Salut/Dades-di-ries-de-COVID-19-per-rees-de-gesti-assist/dmzh-fz47
+09.covid_shire,http://opendatacommons.org/licenses/by/1.0/,https://analisi.transparenciacatalunya.cat/Salut/Dades-di-ries-de-COVID-19-per-comarca/c7sd-zy9j
+09.pop_abs,Vegeu les Condicions d'ús.,https://analisi.transparenciacatalunya.cat/Salut/Registre-central-de-poblaci-del-CatSalut/ftq4-h9vk
+09.deceased_shire,http://opendatacommons.org/licenses/by/1.0/,https://analisi.transparenciacatalunya.cat/Salut/Registre-de-defuncions-per-COVID-19-a-Catalunya-Se/uqk7-bf9s
+13.covid_abs,https://creativecommons.org/licenses/by/4.0/legalcode.es,"https://datos.comunidad.madrid/catalogo/dataset/covid19_tia_zonas_basicas_salud,https://datos.gob.es/es/catalogo/a13002908-covid-19-tia-zonas-basicas-de-salud1"
+13.covid_mundis,https://creativecommons.org/licenses/by/4.0/legalcode.es,"https://datos.comunidad.madrid/catalogo/dataset/covid19_tia_muni_y_distritos,https://datos.gob.es/es/catalogo/a13002908-covid-19-tia-por-municipios-y-distritos-de-madrid1"
+16.covid_abs,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://opendata.euskadi.eus/catalogo/-/evolucion-del-coronavirus-covid-19-en-euskadi/,https://opendata.euskadi.eus/contenidos/ds_informes_estudios/covid_19_2020/opendata/index.json"
+16.covid_cumun,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://opendata.euskadi.eus/catalogo/-/evolucion-del-coronavirus-covid-19-en-euskadi/,https://opendata.euskadi.eus/contenidos/ds_informes_estudios/covid_19_2020/opendata/index.json"
+16.covid_hosp,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://opendata.euskadi.eus/catalogo/-/evolucion-del-coronavirus-covid-19-en-euskadi/,https://opendata.euskadi.eus/contenidos/ds_informes_estudios/covid_19_2020/opendata/index.json"
+ine_mov.movements,http://www.ine.es/aviso_legal,"https://www.ine.es/experimental/movilidad/experimental_em.htm,https://www.ine.es/covid/covid_movilidad.htm"
+ine_mov.movements_em3,http://www.ine.es/aviso_legal,"https://www.ine.es/experimental/movilidad/experimental_em.htm,https://www.ine.es/experimental/movilidad/experimental_em3.htm"
+15.covid_abs,https://creativecommons.org/licenses/by/4.0/deed.es,"https://gobiernoabierto.navarra.es/es/open-data/datos/datos-zonas-basicas-salud-covid-19,https://gobiernoabierto.navarra.es/es/open-data/datos/datos-poblacion-zonas-basicas-salud-covid-19"
+07.covid_abs,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://datosabiertos.jcyl.es/web/jcyl/set/es/salud/tasa-coronavirus-zonas-basicas-salud/1284942912395,https://analisis.datosabiertos.jcyl.es/explore/embed/dataset/tasa-enfermos-acumulados-por-areas-de-salud/table/"
+07.covid_hosp,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://datosabiertos.jcyl.es/web/jcyl/set/es/salud/situacion-coronavirus-hospitales/1284941728695,https://analisis.datosabiertos.jcyl.es/explore/dataset/situacion-de-hospitalizados-por-coronavirus-en-castilla-y-leon/table/"
+07.deceased_abs,https://creativecommons.org/licenses/by/4.0/deed.es_ES,"https://datosabiertos.jcyl.es/web/jcyl/set/es/salud/tasa-mortalidad-centros-coronavirus/1284947958320,https://analisis.datosabiertos.jcyl.es/explore/dataset/tasa-mortalidad-covid-por-zonas-basicas-de-salud/table/"
+02.covid_hosp,https://creativecommons.org/licenses/by/4.0/,https://opendata.aragon.es/datos/catalogo/dataset/publicaciones-y-anuncios-relacionados-con-el-coronavirus-en-aragon
+02.covid_cpro,https://creativecommons.org/licenses/by/4.0/,https://opendata.aragon.es/datos/catalogo/dataset/publicaciones-y-anuncios-relacionados-con-el-coronavirus-en-aragon
+15.covid_cp,https://choosealicense.com/no-permission/,
+ES.covid_cpro,https://choosealicense.com/no-permission/,https://cnecovid.isciii.es/covid19/
+ES.hosp_covid_cpro,https://choosealicense.com/no-permission/,https://cnecovid.isciii.es/covid19/
+ES.covid_cca,https://choosealicense.com/no-permission/,https://cnecovid.isciii.es/covid19/
+ES.covid_decl_cca,https://choosealicense.com/no-permission/,https://cnecovid.isciii.es/covid19/
+06.covid_cumun,https://www.icane.es/footer/legal-advisory,https://www.scsalud.es/coronavirus
+mitma_mov.movements_raw,https://www.mitma.gob.es/el-ministerio/buen-gobierno/licencia_datos,https://www.mitma.gob.es/ministerio/covid-19/evolucion-movilidad-big-data/opendata-movilidad
+mitma_mov.zone_movements,https://www.mitma.gob.es/el-ministerio/buen-gobierno/licencia_datos,https://www.mitma.gob.es/ministerio/covid-19/evolucion-movilidad-big-data/opendata-movilidad
+ES.MoMo_cca,https://choosealicense.com/no-permission/,https://momo.isciii.es/public/momo/dashboard/momo_dashboard.html
+ES.confinements,https://choosealicense.com/no-permission/,
+10.covid_cumun,http://www.opendefinition.org/licenses/cc-by,https://dadesobertes.gva.es/dataset/covid-19-casos-confirmats-pcr-casos-pcr-en-els-ultims-14-dies-i-persones-mortes-per-municipi-2020
+10.covid_cumun,http://www.opendefinition.org/licenses/cc-by,https://dadesobertes.gva.es/dataset/covid-19-casos-confirmats-pcr-casos-pcr-en-els-ultims-14-dies-i-persones-mortes-per-municipi-2021
+10.covid_ds,http://www.opendefinition.org/licenses/cc-by,https://dadesobertes.gva.es/dataset/covid-19-casos-confirmats-pcr-casos-pcr-ultims-14-dies-i-persones-mortes-per-departament-2020
+10.covid_ds,http://www.opendefinition.org/licenses/cc-by,https://dadesobertes.gva.es/dataset/covid-19-casos-confirmats-pcr-casos-pcr-ultims-14-dies-i-persones-mortes-per-departament-2021
+rel.pop_cumun,https://sedempr.gob.es/es/content/aviso-legal,"https://www.mptfp.gob.es/portal/politica-territorial/local/sistema_de_informacion_local_-SIL-/registro_eell.html,https://datos.gob.es/en/catalogo/e05024601-registro-de-entidades-locales-busqueda-por-municipios"
+escovid19.prov,https://github.com/montera34/escovid19data/blob/master/LICENSE.md,https://github.com/montera34/escovid19data
+escovid19.ccaa,https://github.com/montera34/escovid19data/blob/master/LICENSE.md,https://github.com/montera34/escovid19data
+escovid19.spain,https://github.com/montera34/escovid19data/blob/master/LICENSE.md,https://github.com/montera34/escovid19data
+12.covid_as,https://choosealicense.com/no-permission/,https://coronavirus.sergas.gal/datos/#/es-ES/galicia
+12.covid_pcr_as,https://choosealicense.com/no-permission/,https://coronavirus.sergas.gal/datos/#/es-ES/galicia
+12.covid_percent_as,https://choosealicense.com/no-permission/,https://coronavirus.sergas.gal/datos/#/es-ES/galicia
+03.covid_as,https://choosealicense.com/no-permission/,"https://obsaludasturias.com/obsa/niveles-covid-19/,https://dgspasturias.shinyapps.io/panel_de_indicadores_asturias/"
+03.covid_cumun,https://choosealicense.com/no-permission/,"https://obsaludasturias.com/obsa/niveles-covid-19/,https://dgspasturias.shinyapps.io/panel_de_indicadores_asturias/"
+Generated at,2021-02-22,
