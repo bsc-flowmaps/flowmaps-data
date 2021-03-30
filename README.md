@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/335702870.svg)](https://zenodo.org/badge/latestdoi/335702870)
 # flowmaps-data
 
 A tool for downloading COVID-19 and mobility datasets for Spain. 
