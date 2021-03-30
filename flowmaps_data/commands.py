@@ -1,3 +1,4 @@
+import os
 import json
 import pandas as pd
 from dateutil.parser import parse
@@ -192,6 +193,28 @@ def describe_hourly_mobility(date, only_url=False):
             print(f"date: {doc['keywords'].get('evday')}")
             print(f"url: {doc['fetched'][0].get('from')}\n")
             print(f"Full provenance: {json.dumps(data, indent=4)}")
+
+
+def _download_hourly_mobility(date, output_dir):
+    filters = {
+        'storedIn': 'mitma_mov.movements_raw',
+        'keywords.evday': {'$gte': date_rfc1123(parse_date(date)), '$lt': date_rfc1123(parse_date(date) + timedelta(days=1))}
+    }
+    data = fetch_all_pages('provenance', filters, progress=False)
+    url = data[0]['fetched'][0]['from']
+    filename = f'mitma_mov-maestra1-{date}.parquet'
+    path = os.path.join(output_dir, filename)
+    command = f'curl {url} | gunzip -c | python3 -c "import pandas, sys; df=pandas.read_csv(sys.stdin); df.to_parquet(\'{path}\')"'
+    print(f"Downloading and extracting data for date: {date}")
+    print(command)
+    os.system(command)
+    print('')
+
+
+def download_hourly_mobility(start_date, end_date, output_dir):
+    for date in pd.date_range(start_date, end_date):
+        date_str = date.strftime('%Y-%m-%d')
+        _download_hourly_mobility(date_str, output_dir)
 
 
 def list_daily_mobility():

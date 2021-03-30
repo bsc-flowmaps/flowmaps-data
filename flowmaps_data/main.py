@@ -103,6 +103,14 @@ CONFIG = {
                     "--only-url": {"dest": "only_url", "required": False, "default": False, "action": "store_true", "help": "", },
                 },
             },
+            "download": {
+                "fn": commands.download_hourly_mobility,
+                "argparse": {
+                    "--start-date": {"required": True, "dest": "start_date", "type": str, "help": "", },
+                    "--end-date": {"required": True, "dest": "end_date", "type": str, "help": "", },
+                    "--output-dir": {"required": True, "dest": "output_dir", "type": str, "help": "", },
+                },
+            },
         },
     },
     "daily_mobility": {
