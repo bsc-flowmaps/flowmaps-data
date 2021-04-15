@@ -103,6 +103,7 @@ def daily_mobility(source_layer, target_layer, start_date=None, end_date=None, s
     if target:
         filters['target'] = target
     data = fetch_all_pages('mitma_mov.daily_mobility_matrix', filters, print_url=print_url)
+    data = clean_docs(data, ['source_layer', 'target_layer', '_id', 'updated_at'])
     return pd.DataFrame(data)
 
 
@@ -118,6 +119,7 @@ def population(layer, start_date=None, end_date=None, print_url=False):
     elif end_date:
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
+    data = clean_docs(data, ['_id', 'type', 'layer', 'updated_at'])
     return pd.DataFrame(data)
 
 

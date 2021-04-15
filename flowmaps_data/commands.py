@@ -204,7 +204,8 @@ def _download_hourly_mobility(date, output_dir):
     url = data[0]['fetched'][0]['from']
     filename = f'mitma_mov-maestra1-{date}.parquet'
     path = os.path.join(output_dir, filename)
-    command = f'curl {url} | gunzip -c | python3 -c "import pandas, sys; df=pandas.read_csv(sys.stdin); df.to_parquet(\'{path}\')"'
+    dtypes = "{'fecha': str, 'origen': str, 'destino': str, 'actividad_origen': str, 'actividad_destino': str, 'residencia': int, 'edad': str, 'periodo': int, 'distancia': str, 'viajes': float, 'viajes_km': float}"
+    command = f'curl {url} | gunzip -c | python3 -c "import pandas, sys; df=pandas.read_csv(sys.stdin, sep=\'|\', dtype={dtypes}); df.to_parquet(\'{path}\')"'
     print(f"Downloading and extracting data for date: {date}")
     print(command)
     os.system(command)
