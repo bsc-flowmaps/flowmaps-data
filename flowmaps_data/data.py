@@ -41,35 +41,9 @@ def covid19(ev, start_date=None, end_date=None, print_url=False):
     elif end_date:
         filters['date'] = {'$lte': end_date}
 
-    cases = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    cases = clean_docs(cases, ['d', 'c', 'updated_at', '_id', 'was_missing', 'type', 'ev'])
-    layer = cases[0]['layer'] # get layer for this ev
-    cases = pd.DataFrame(cases)
-
-    # fetch population
-    filters = {
-        'type': 'population',
-        'layer': layer,
-    }
-    if start_date and end_date:
-        filters['date'] = {'$gte': start_date, '$lte': end_date}
-    elif start_date:
-        filters['date'] = {'$gte': start_date}
-    elif end_date:
-        filters['date'] = {'$lte': end_date}
-
-    population = fetch_all_pages('layers.data.consolidated', filters, print_url=False)
-    population = pd.DataFrame(population)
-
-    # merge data
-    df = pd.merge(cases, population, left_on=['id', 'layer', 'date'], right_on=['id', 'layer', 'date'], how='inner')
-    df['active_cases_14_by_100k'] = 100000 * df['active_cases_14'] / df['population']
-    df['active_cases_7_by_100k'] = 100000 * df['active_cases_7'] / df['population']
-    df['new_cases_by_100k'] = 100000 * df['new_cases'] / df['population']
-    df['total_cases_by_100k'] = 100000 * df['total_cases'] / df['population']
-    del df['_id']
-    del df['type']
-    del df['updated_at']
+    cursor = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
+    cursor = clean_docs(cursor, ['d', 'c', 'updated_at', '_id', 'was_missing', 'type', 'ev'])
+    df = pd.DataFrame(cursor)
     return df
 
 
