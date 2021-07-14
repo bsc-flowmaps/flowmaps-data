@@ -119,7 +119,10 @@ def risk(source_layer, target_layer, ev, date):
         'date': date
     }
     mobility = fetch_all_pages('mitma_mov.daily_mobility_matrix', filters, print_url=False)
+    if not mobility:
+        raise Exception(f'Missing mobility data matching: {filters}')
     mobility = pd.DataFrame(mobility)
+    mobility = mobility[['source', 'target', 'source_layer', 'target_layer', 'trips']]
 
     filters = {
         'type': 'covid19',
@@ -127,18 +130,24 @@ def risk(source_layer, target_layer, ev, date):
         'date': date
     }
     cases = fetch_all_pages('layers.data.consolidated', filters, print_url=False)
+    if not cases:
+        raise Exception(f'Missing Covid19 data matching: {filters}')
     cases = pd.DataFrame(cases)
 
-    filters = {
-        'type': 'population',
-        'layer': source_layer,
-        'date': date
-    }
-    population = fetch_all_pages('layers.data.consolidated', filters, print_url=False)
-    population = pd.DataFrame(population)
-
     df = pd.merge(mobility, cases, left_on='source', right_on='id', how='inner')
-    df = pd.merge(df, population, left_on='source', right_on='id', how='inner')
+
+    if 'population' not in cases.columns: 
+        filters = {
+            'type': 'population',
+            'layer': source_layer,
+            'date': date
+        }
+        population = fetch_all_pages('layers.data.consolidated', filters, print_url=False)
+        population = pd.DataFrame(population)
+        if not population:
+            raise Exception(f'Missing population data matching: {filters}')
+        df = pd.merge(df, population, left_on='source', right_on='id', how='inner')
+
     df = df.rename(columns={'population': 'source_population', 'active_cases_14': 'source_cases_last_14_days', 'active_cases_7': 'source_cases_last_7_days', 'new_cases': 'source_cases'})
     df = df[['source_layer', 'target_layer', 'date', 'source', 'target', 'trips', 'source_population', 'source_cases_last_14_days', 'source_cases_last_7_days', 'source_cases', 'ev']]
     df['source_cases_by_100k_last_14_days'] = 100000 * df['source_cases_last_14_days'] / df['source_population']

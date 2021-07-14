@@ -85,6 +85,11 @@ examples:
     flowmaps-data datasets list
     flowmaps-data datasets describe --ev ES.covid_cpro
     flowmaps-data datasets download --ev ES.covid_cpro --output-file out.csv --output-type csv
+
+    # Mobility Associated Risk
+    flowmaps-data risk list
+    flowmaps-data risk list-dates
+    flowmaps-data risk download --source-layer cnig_provincias --target-layer cnig_provincias --ev ES.covid_cpro --date 2020-10-10 --output-file out.csv --output-format csv
 ```
 
 
