@@ -321,6 +321,7 @@ def list_zone_movements():
         'query': {'type': 'zone_movements'},
     }
     data = fetch_all_pages('distinct', filters)
+    data.insert(0, "mitma_mov") # mitma_mov layer is always available to download from its own collection
     print("\n".join(data))
 
 
