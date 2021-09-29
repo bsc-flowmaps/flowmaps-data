@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import datetime, timedelta
 
-from .utils import fetch_first, fetch_all_pages, parse_date, date_rfc1123
+from .utils import fetch_first, fetch_all_pages, parse_date, date_rfc1123, tz
 
 
 def geolayer(layer, print_url=False):
@@ -97,7 +97,33 @@ def population(layer, start_date=None, end_date=None, print_url=False):
     return pd.DataFrame(data)
 
 
+def _zone_movements_mitma_mov(start_date=None, end_date=None, print_url=False):
+    filters = {}
+    if start_date and end_date:
+        filters['evstart'] = {'$gte': date_rfc1123(parse_date(start_date)), '$lt': date_rfc1123(parse_date(end_date) + timedelta(days=1))}
+    elif start_date:
+        filters['evstart'] = {'$gte': date_rfc1123(parse_date(start_date))}
+    elif end_date:
+        filters['evstart'] = {'$lt': date_rfc1123(parse_date(end_date) + timedelta(days=1))}
+    data = fetch_all_pages('mitma_mov.zone_movements', filters, print_url=print_url)
+    df = pd.DataFrame(data)
+
+    # add a date string column
+    df['evstart'] = pd.to_datetime(df['evstart'])
+    df['evstart'] = df['evstart'].dt.tz_convert(tz)
+    df['date'] = df['evstart'].dt.strftime('%Y-%m-%d')
+
+    # replace 'inf' with 3
+    df['viajes'] = df['viajes'].map(lambda x: 3 if x == float('inf') else x)
+
+    columns = ['id', 'date', 'viajes', 'personas']
+    return df[columns]
+
+
 def zone_movements(layer, start_date=None, end_date=None, print_url=False):
+    if layer == 'mitma_mov':
+        return _zone_movements_mitma_mov(start_date, end_date, print_url)
+
     filters = {
         'layer': layer,
         'type': 'zone_movements',
@@ -109,7 +135,8 @@ def zone_movements(layer, start_date=None, end_date=None, print_url=False):
     elif end_date:
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    return pd.DataFrame(data)
+    columns = ['id', 'date', 'viajes', 'personas']
+    return pd.DataFrame(data)[columns]
 
 
 def risk(source_layer, target_layer, ev, date):
