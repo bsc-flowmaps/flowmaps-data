@@ -66,6 +66,11 @@ examples:
     flowmaps-data covid19 describe --ev ES.covid_cpro
     flowmaps-data covid19 download --ev ES.covid_cpro --output-file out.csv --output-type csv
 
+    # Deceased datasets
+    flowmaps-data deceased list
+    flowmaps-data deceased describe --ev ES.hosp_covid_cpro
+    flowmaps-data deceased download --ev ES.hosp_covid_cpro --output-file out.csv --output-type csv
+
     # Population
     flowmaps-data population list
     flowmaps-data population describe --layer cnig_provincias
@@ -81,7 +86,7 @@ examples:
     flowmaps-data zone_movements describe
     flowmaps-data zone_movements download --layer cnig_provincias --output-file out.csv --start-date 2020-10-10 --end-date 2020-10-10
 
-    # Raw datasets
+    # Other datasets
     flowmaps-data datasets list
     flowmaps-data datasets describe --ev ES.covid_cpro
     flowmaps-data datasets download --ev ES.covid_cpro --output-file out.csv --output-type csv

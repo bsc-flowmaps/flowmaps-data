@@ -425,7 +425,7 @@ def list_deceased():
     temp = {d["keywords"]["ev"]: d for d in data}
     data = list(temp.values())
 
-    keywords = ["deceased", "muertes", "fallecimientos", "fallecidas", "fallecidos"]
+    keywords = ["deceased", "muertes", "fallecimientos", "fallecidas", "fallecidos", "defunciones"]
     for doc in data:
         description = doc['keywords']['evDesc'].lower()
         if any(item in description for item in keywords):
