@@ -180,3 +180,8 @@ def risk(source_layer, target_layer, ev, date):
     df['source_cases_by_100k_last_14_days'] = 100000 * df['source_cases_last_14_days'] / df['source_population']
     df['risk'] = df['trips'] * df['source_cases_last_14_days'] / df['source_population']
     return df
+
+
+def deceased(ev, start_date=None, end_date=None, print_url=False):
+    # deceased datasets are no consolidated, so they can just be downloaded as any other dataset
+    return dataset(ev, start_date=start_date, end_date=end_date, print_url=print_url)

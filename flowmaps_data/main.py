@@ -218,6 +218,31 @@ CONFIG = {
             },
         },
     },
+    "deceased": {
+        "subcommands": {
+            "list": {
+                "fn": commands.list_deceased,
+                "argparse": {},
+            },
+            "describe": {
+                "fn": commands.describe_data,
+                "argparse": {
+                    "--ev": {"required": True, "type": str, "help": "", },
+                    "--provenance": {"required": False, "default": False, "action": "store_true", "help": "show provenance", },
+                },
+            },
+            "download": {
+                "fn": commands.download_deceased,
+                "argparse": {
+                    "--ev": {"required": True, "type": str, "help": "", },
+                    "--output-file": {"required": True, "dest": "output_file", "type": str, "help": "", },
+                    "--output-format": {"required": False, "dest": "output_format", "default": "csv", "type": str, "help": "", },
+                    "--start-date": {"dest": "start_date", "required": False, "type": str, "help": "", },
+                    "--end-date": {"dest": "end_date", "required": False, "type": str, "help": "", },
+                },
+            },
+        }
+    },
 }
 
 

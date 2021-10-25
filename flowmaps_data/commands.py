@@ -118,6 +118,11 @@ def list_data():
         'storedIn': 'layers.data',
     }
     data = fetch_all_pages('provenance', filters, progress=False)
+
+    # remove duplicates
+    temp = {d["keywords"]["ev"]: d for d in data}
+    data = list(temp.values())
+
     for doc in data:
         print(f"{doc['keywords']['ev']}\n\tDescription: {doc['keywords'].get('evDesc', '')}\n\tlayer: {doc['keywords'].get('layer')}\n")
 
@@ -407,3 +412,31 @@ def download_risk(source_layer, target_layer, ev, date, output_file, output_form
     df = risk(source_layer, target_layer, ev, date)
     save_df(df, output_file, output_format)
 
+
+def list_deceased():
+    print("List of datasets that include deceased data:\n")
+
+    filters = {
+        'storedIn': 'layers.data',
+    }
+    data = fetch_all_pages('provenance', filters, progress=False)
+    
+    # remove duplicates
+    temp = {d["keywords"]["ev"]: d for d in data}
+    data = list(temp.values())
+
+    keywords = ["deceased", "muertes", "fallecimientos", "fallecidas", "fallecidos"]
+    for doc in data:
+        description = doc['keywords']['evDesc'].lower()
+        if any(item in description for item in keywords):
+            print(f"{doc['keywords']['ev']}\n\tDescription: {doc['keywords'].get('evDesc', '')}\n\tlayer: {doc['keywords'].get('layer')}\n")
+
+
+def describe_deceased(ev, provenance=False):
+    return describe_data(ev, provenance=provenance)
+
+
+def download_deceased(ev, output_file, output_format='csv', start_date=None, end_date=None):
+    print(f'Dowloading data for ev={ev}')
+    df = dataset(ev, start_date=start_date, end_date=end_date, print_url=True)
+    save_df(df, output_file, output_format)
