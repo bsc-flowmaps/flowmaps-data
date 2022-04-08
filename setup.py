@@ -4,16 +4,16 @@ import os
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-root = os.path.dirname(os.path.realpath(__file__))
-requirementPath = root + '/requirements.txt'
-install_requires = []
-if os.path.isfile(requirementPath):
-    with open(requirementPath) as f:
-        install_requires = f.read().splitlines()
+# root = os.path.dirname(os.path.realpath(__file__))
+# requirementPath = root + '/requirements.txt'
+# install_requires = []
+# if os.path.isfile(requirementPath):
+#     with open(requirementPath) as f:
+#         install_requires = f.read().splitlines()
 
 setuptools.setup(
     name="flowmaps_data",
-    version="0.0.23",
+    version="0.0.24",
     author="Javier del Valle Contreras",
     author_email="javier.delvalle@bsc.es",
     description="A tool for downloading Spanish COVID-19 and mobility data",
@@ -27,7 +27,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=install_requires,
+    # install_requires=install_requires,
+    install_requires=["pytz", "progress", "pandas", "requests", "python_dateutil", "parquet", "pyarrow"],
     entry_points={
         'console_scripts': ['flowmaps-data=flowmaps_data:main'],
     }
