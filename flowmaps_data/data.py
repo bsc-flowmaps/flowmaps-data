@@ -32,7 +32,7 @@ def covid19(ev, start_date=None, end_date=None, print_url=False):
     # fetch covid cases
     filters = {
         'ev': ev,
-        'type': 'covid19',
+        'type': 'consolidated' # 'type': 'covid19',
     }
     if start_date and end_date:
         filters['date'] = {'$gte': start_date, '$lte': end_date}
@@ -42,9 +42,18 @@ def covid19(ev, start_date=None, end_date=None, print_url=False):
         filters['date'] = {'$lte': end_date}
 
     cursor = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
-    cursor = clean_docs(cursor, ['d', 'c', 'updated_at', '_id', 'was_missing', 'type', 'ev'])
+    # small fix to allowquerying fromtype consolidated which solves the problem with population NaN
+    # cursor = clean_docs(cursor, ['d', 'c', 'updated_at', '_id', 'was_missing', 'type', 'ev'])
+    cursor = clean_docs(cursor, ['_id', 'type', 'ev'])
     df = pd.DataFrame(cursor)
+    columns = [ "id", "date", "layer", "population", "new_cases", "total_cases",
+                "active_cases_7", "active_cases_14", "new_cases_mean_7", "new_cases_mean_14",
+                "active_cases_14_by_100k", "active_cases_7_by_100k", "new_cases_by_100k",
+                "total_cases_by_100k"]
+
+    df = df[columns]
     return df
+
 
 
 def dataset(ev, start_date=None, end_date=None, print_url=False):
@@ -136,7 +145,9 @@ def zone_movements(layer, start_date=None, end_date=None, print_url=False):
         filters['date'] = {'$lte': end_date}
     data = fetch_all_pages('layers.data.consolidated', filters, print_url=print_url)
     columns = ['id', 'date', 'viajes', 'personas']
-    return pd.DataFrame(data)[columns]
+    df = pd.DataFrame(data)
+    df = df[columns]
+    return df
 
 
 def risk(source_layer, target_layer, ev, date):
