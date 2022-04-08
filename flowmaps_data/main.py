@@ -265,7 +265,7 @@ examples:
     # Deceased datasets
     flowmaps-data deceased list
     flowmaps-data deceased describe --ev ES.hosp_covid_cpro
-    flowmaps-data deceased download --ev ES.hosp_covid_cpro --output-file out.csv --output-type csv
+    flowmaps-data deceased download --ev ES.hosp_covid_cpro --output-file out.csv --output-format csv
 
     # Population
     flowmaps-data population list
