@@ -77,9 +77,9 @@ examples:
     flowmaps-data population download --layer zbs_15 --output-file out.csv
 
     # Origin-destination daily mobility (from MITMA)
-    flowmaps-data daily_mobility_matrix list
-    flowmaps-data daily_mobility_matrix describe
-    flowmaps-data daily_mobility_matrix download --source-layer cnig_provincias --target-layer cnig_provincias --start-date 2020-10-10 --end-date 2020-10-16 --output-file out.csv
+    flowmaps-data daily_mobility list
+    flowmaps-data daily_mobility describe
+    flowmaps-data daily_mobility download --source-layer cnig_provincias --target-layer cnig_provincias --start-date 2020-10-10 --end-date 2020-10-16 --output-file out.csv
 
     # Daily zone movements (from MITMA)
     flowmaps-data zone_movements list
@@ -102,7 +102,7 @@ examples:
 ### Python module
 
 ```
-from flowmaps_data import geolayer, covid19, dataset, daily_mobility_matrix, population, zone_movements
+from flowmaps_data import geolayer, covid19, dataset, daily_mobility, population, zone_movements
 
 # Geojson layers
 geojson = geolayer('cnig_provincias')
@@ -114,7 +114,7 @@ df = covid19(ev='ES.covid_cpro')
 df = dataset(ev='ES.covid_cpro')
 
 # Origin-destination daily mobility (from MITMA)
-df = daily_mobility_matrix(source_layer='cnig_provincias', target_layer='cnig_provincias', start_date='2020-11-01', end_date='2020-12-01', source='28', target='08')
+df = daily_mobility(source_layer='cnig_provincias', target_layer='cnig_provincias', start_date='2020-11-01', end_date='2020-12-01', source='28', target='08')
 
 # Daily zone movements (from MITMA)
 df = zone_movements(layer='cnig_provincias')
@@ -159,4 +159,3 @@ fig.show()
 ```
 
 ![covid incidence by province](https://i.imgur.com/2zPOt7u.png)
-
